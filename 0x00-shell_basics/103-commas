@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -mapU
+ls -mapv
