@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -lR . | egrep -c '^d'
+ls -lR . | wc -l
