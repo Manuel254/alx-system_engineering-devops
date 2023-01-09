@@ -2,4 +2,4 @@
 
 This is a command line challenge that tests your bash skills
 
-Link: [cmd challenge]("https://cmdchallenge.com/")
+Link:[CMD challenge]("https://cmdchallenge.com/")
