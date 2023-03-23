@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# displays "To infinity and beyond" indefinitely
+
+echo $$ > /var/run/myscript.pid
+trap "echo I hate the kill command; sudo rm -f /var/run/myscript.pid; exit" 15
+trap "echo Y U no love me?!" 2
+trap "sudo rm -f /var/myscript.pid; exit" 3
+
+count=0
+while (( count >= 0 ))
+do
+	echo "To infinity and beyond"
+	(( count++ ))
+	sleep 2
+done
