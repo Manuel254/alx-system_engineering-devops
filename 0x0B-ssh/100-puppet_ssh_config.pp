@@ -1,17 +1,11 @@
-# Puppet file to make configurations to the SSH client configuration
-
-file_line { 'key':
-  path    => '/etc/ssh/ssh_config',
-  line    => 'IdentityFile ~/.ssh/school',
-  match   => '^#?\\s*IdentityFile\\s+',
-  require => Package['openssh-client'],
-  notify  => Service['ssh'],
+# Turn off password authentication
+exec { 'Turn off passwd auth':
+  command => '/bin/sed -i "s/^#?\\s*PasswordAuthentication\\s.*/PasswordAuthentication no/g" /etc/ssh/sshd_config',
+  unless  => '/bin/grep -q "^\\s*PasswordAuthentication\\s*no\\s*$" /etc/ssh/sshd_config',
 }
 
-file_line { 'password':
-  path    => '/etc/ssh/ssh_config',
-  line    => 'PasswordAuthentication no',
-  match   => '^#?\\s*PasswordAuthentication\\s+',
-  require => Package['openssh-client'],
-  notify  => Service['ssh'],
+# Declare identity file
+exec { 'Declare identity file':
+  command => '/bin/echo -e "\nIdentityFile /path/to/identity/file" >> /etc/ssh/ssh_config',
+  unless  => '/bin/grep -q "^\\s*IdentityFile\\s*/path/to/identity/file\\s*$" /etc/ssh/ssh_config',
 }
