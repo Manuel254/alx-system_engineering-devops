@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
 # Installs nginx web server and configurations
 
-sudo apt update
-sudo apt install -y nginx
-ufw allow "Nginx HTTP"
+apt update
+apt install -y nginx
 
 echo "Hello World!" > /var/www/html/index.html
+
+echo "
+http {
+        server {
+                listen 80;
+                root /var/www/html/;
+        }
+}
+
+events {}" > /etc/nginx/nginx.conf
+
+nginx -s reload
 service nginx start
