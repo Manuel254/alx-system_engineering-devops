@@ -6,7 +6,6 @@ sudo apt update
 sudo apt-get install -y --no-install-recommends software-properties-common
 sudo add-apt-repository ppa:vbernat/haproxy-2.0
 sudo apt-get install -y haproxy=2.0.\*
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
 sudo service haproxy start
 
 if ! grep -qF "frontend client" "$CONF"
@@ -24,4 +23,5 @@ backend myservers
 	server 125472-web-02 34.224.1.8
 EOF
 fi
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
 sudo service haproxy restart
