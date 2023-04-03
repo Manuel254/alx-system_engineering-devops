@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Installs a load balancer and configures it
+CONF="/etc/haproxy/haproxy.cfg"
+
+sudo apt update
+sudo apt-get install -y --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.7
+sudo apt-get install -y haproxy=2.7.\*
+sudo service haproxy start
+if ! grep -qF "frontend client" "$CONF"
+then
+sudo tee -a "$CONF" <<EOF
+
+frontend client
+	bind *:80
+	mode http
+	default_backend myservers
+
+backend myservers
+	mode http
+	server 128472-web-01 100.25.138.30
+	server 125472-web-02 34.224.1.8
+EOF
+fi
+sudo service haproxy restart
