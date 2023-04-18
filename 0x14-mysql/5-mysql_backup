@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Create a backup of all databases and an archive out of it
+
+passwd=$1
+filename=$(date +"%d-%m-%Y").tar.gz
+
+sudo mysqldump -u root -p "$passwd" --all-databases | sudo tee backup.sql >/dev/null 2>&1
+tar -cf "$filename" backup.sql
