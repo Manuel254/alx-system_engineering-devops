@@ -4,5 +4,6 @@
 passwd=$1
 filename=$(date +"%d-%m-%Y").tar.gz
 
-sudo mysqldump -u root -p "$passwd" --all-databases | sudo tee backup.sql >/dev/null 2>&1 && echo "backup.sql"
-tar -cf "$filename" backup.sql
+sudo mysqldump -u root -p "$passwd" --all-databases | sudo tee backup.sql >/dev/null 2>&1
+tar -czf "$filename" backup.sql
+tar -tf "$filename"
