@@ -4,6 +4,6 @@
 passwd=$1
 filename=$(date +%d-%m-%Y).tar.gz
 
-mysqldump -u root -p "$passwd" --all-databases > backup.sql
+mysqldump -uroot -p"$passwd" --all-databases > backup.sql
 tar -czf "$filename" backup.sql
 tar -tf "$filename"
