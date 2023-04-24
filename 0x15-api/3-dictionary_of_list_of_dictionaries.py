@@ -17,11 +17,20 @@ if __name__ == '__main__':
     todos_data = todos.json()
     user_data = users.json()
 
-    data = {user.get('id'): [{"task": todo.get('title'),
-              "completed": todo.get('completed'),
-              "username": user.get('username')}
-              for todo in todos_data]
-              for user in user_data}
+    new_dict = {}
+
+    for user in user_data:
+        username = user.get('username')
+        user_id = user.get('id')
+        todos = []
+        for todo in todos_data:
+            if todo.get('userId') == user_id:
+                my_dict = {
+                        "username": username,
+                        "task": todo.get('title'),
+                        "completed": todo.get('completed')}
+                todos.append(my_dict)
+        new_dict[user_id] = todos
 
     with open('todo_all_employees.json', 'w') as f:
-        json.dump(data, f)
+        json.dump(new_dict, f)
