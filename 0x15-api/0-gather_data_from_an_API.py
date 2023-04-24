@@ -24,7 +24,7 @@ if __name__ == '__main__':
     done_tasks = len(list(filter(
                lambda done: done.get('completed'), emp_data)))
     emp_name = user_data.get('name')
-    
+
     print("Employee {} is done with tasks({}/{}):".format(
           emp_name, done_tasks, num_tasks))
 
