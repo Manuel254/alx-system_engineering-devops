@@ -19,6 +19,6 @@ def number_of_subscribers(subreddit):
     url = 'https://reddit.com/r/{}/about.json'.format(subreddit)
     header = {'User-Agent': 'Chrome/88.0.4324.188'}
 
-    res = requests.get(url, headers=header)
+    res = requests.get(url, headers=header, allow_redirects=False)
     data = res.json().get('data')
     return data.get('subscribers')
