@@ -20,5 +20,9 @@ def number_of_subscribers(subreddit):
     header = {'User-Agent': 'Chrome/88.0.4324.188'}
 
     res = requests.get(url, headers=header, allow_redirects=False)
-    data = res.json().get('data')
-    return data.get('subscribers')
+    
+    try:
+        data = res.json().get('data')
+        return data.get('subscribers')
+    except Exception:
+        return 0
