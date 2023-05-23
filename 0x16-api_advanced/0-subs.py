@@ -13,7 +13,7 @@ def number_of_subscribers(subreddit):
     Return:
         number of subscribers (int)
     """
-    if not isinstance(sunreddit, str) or subreddit is None:
+    if subreddit is None:
         return 0
 
     url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
